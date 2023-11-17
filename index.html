@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignment 2 - Website Building</title>
+    <link rel="icon-success" href="./icons/success-icon.png">
+    <link rel="icon-error" href="./icons/error-icon.png">
     <style>
         body {
             box-sizing: border-box;
@@ -68,14 +70,14 @@
                 <label for="username">Username:</label>
                 <input id="username" type="text">
                 <span id="username-error" class="error-message"></span>
-                <i id="username-icon" class="error-icon"></i>
+                <i id="username-icon" class="icon-error"></i>
             </div>
 
             <div>
                 <label for="password">Password:</label>
                 <input id="password" type="password">
                 <span id="password-error" class="error-message"></span>
-                <i id="password-icon" class="error-icon"></i>
+                <i id="password-icon" class="icon-error"></i>
             </div>
 
             <input type="submit" value="Login">
@@ -85,41 +87,44 @@
 
     <script>
         document.getElementById('login-form').addEventListener('submit', function (event) {
-            event.preventDefault(); 
-
-            
+            event.preventDefault();
+    
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
-
+    
             document.getElementById('username').classList.remove('invalid', 'valid');
             document.getElementById('password').classList.remove('invalid', 'valid');
             document.getElementById('username-error').textContent = '';
             document.getElementById('password-error').textContent = '';
-            document.getElementById('username-icon').className = 'error-icon';
-            document.getElementById('password-icon').className = 'error-icon';
-
+            document.getElementById('username-icon').innerHTML = '';
+            document.getElementById('password-icon').innerHTML = '';
+    
             if (username.trim() === '') {
                 document.getElementById('username').classList.add('invalid');
                 document.getElementById('username-error').textContent = 'Please enter username';
+                document.getElementById('username-icon').innerHTML = '<img src="./icons/error-icon.png" class="error-icon">';
             } else if (username !== 'new_user') {
                 document.getElementById('username').classList.add('invalid');
                 document.getElementById('username-error').textContent = 'Please enter a valid username';
+                document.getElementById('username-icon').innerHTML = '<img src="./icons/error-icon.png" class="error-icon">';
             } else {
                 document.getElementById('username').classList.add('valid');
-                document.getElementById('username-icon').className = 'success-icon';
+                document.getElementById('username-icon').innerHTML = '<img src="./icons/success-icon.png" class="success-icon">';
             }
-
+    
             if (password.trim() === '') {
                 document.getElementById('password').classList.add('invalid');
                 document.getElementById('password-error').textContent = 'Please enter password';
+                document.getElementById('password-icon').innerHTML = '<img src="./icons/error-icon.png" class="error-icon">';
             } else if (password !== '123456789') {
                 document.getElementById('password').classList.add('invalid');
                 document.getElementById('password-error').textContent = 'Please enter a valid password';
+                document.getElementById('password-icon').innerHTML = '<img src="./icons/error-icon.png" class="error-icon">';
             } else {
                 document.getElementById('password').classList.add('valid');
-                document.getElementById('password-icon').className = 'success-icon';
+                document.getElementById('password-icon').innerHTML = '<img src="./icons/success-icon.png" class="success-icon">';
             }
-
+    
             var result = document.getElementById('result');
             if (username === 'new_user' && password === '123456789') {
                 result.textContent = 'Successful login!';
